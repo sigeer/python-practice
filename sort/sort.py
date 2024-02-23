@@ -1,4 +1,5 @@
 from abc import ABCMeta, abstractmethod
+import math
 
 class ClassNameMeta(ABCMeta):
     def __init__(self, name, bases, attrs):
@@ -114,3 +115,22 @@ class BubblingSort(SortBase):
                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
 
 BubblingSort.test()
+
+class ShellSort(SortBase):
+    @classmethod
+    def sort(self, arr):
+        gap  = 12
+        
+        while gap > 0:
+            for i in range(gap, len(arr)):
+                flag = arr[i]
+                
+                j = i
+                while j >= gap and arr[j - gap] > flag:
+                    arr[j] = arr[j - gap]
+                    j -= gap
+                arr[j] = flag
+                
+            gap = math.floor(gap / 12)
+
+ShellSort.test()
